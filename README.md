@@ -1,5 +1,7 @@
 
-### Input validation for Shiny
+## Input validation for Shiny
+
+#### Motivation
 
 Shiny takes inputs from UI elements and sends them to the server, where the 
 application gets it as R variables. While Shiny has some security measures in place,
@@ -10,13 +12,17 @@ you are using an input e.g. from a dropdown menu in a SQL query
 Someone manipulating the websocket communication can
 craft a special input that can force the database to execute a query that's
 not supposed to do (SQL injection). This might give an attacker access to data that's
-not supposed to be accessible and it is a common security issue.
+not supposed to be accessible or do other nepharious things, and it is a common security issue.
+
+#### Goal
 
 This simple R package provides functions that you can use to validate input (received 
 from Shiny UI) on the server side (NB: any client side validation can be easily 
 bypassed, so from security point of view you need to validate on the server side).
 
-For example, assume you have a Shiny application that takes a company symbol from a dropdown 
+#### Usage
+
+Assume you have a Shiny application that takes a company name from a dropdown 
 (`selectInput`), gets the stock price from a SQL database and makes a plot. To validate
 such input you would use on the server side (in `server.R`)
 ```
@@ -41,7 +47,21 @@ open a vulnerability. It is also always recommended to restrict the input as muc
 example if you know that your input has just 2 values use `pattern = "^((value1)|(value2))$"")` instead
 of the default `pattern="^[[:alnum:]. _-]+$"`).
 
-Finally, this package is very experimental (just hacked it in an evening), use it at your own risk! 
+#### Alternatives
+
+An alternative approach would be to use prepared statements, but currently for example the `RMySQL` package
+does not support that. Another approach would be to use character "escaping", for example the `mysqlEscapeStrings` function
+in case of `RMySQL`, but that has had in the past bugs/vulnerabilities. 
+
+#### Additional defenses
+
+You should also have additional layers of security, such as minimal priviledges to the database user (e.g. for 
+a Shiny app you might get away with read-only access to just the tables you need), or restricting the Shiny
+app to a limited set of users etc.
+
+#### Disclaimer and how to get involved
+
+Finally, this package is very experimental (just hacked it in an evening), **use it at your own risk!** 
 Any suggestions for improvement are welcome though, and as with any security related code it would
 be crucial to find and fix any bugs (please open an issue on github if you find such).
 
