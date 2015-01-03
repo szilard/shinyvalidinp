@@ -67,12 +67,10 @@ app to a limited set of users etc.
 
 #### Disclaimer and how to get involved
 
-Finally, this package is very experimental (just hacked it in an evening), **use it at your own risk!** 
-Any suggestions for improvement are welcome though, and as with any security related code it would
-be crucial to find and fix any bugs (please open an issue on github if you find such).
-
-
-
+Finally, this package is very experimental, **use it at your own risk!** 
+Any suggestions for improvements are welcome, especially reporting bugs and/or suggesting fixes. 
+As with any security related code, it would be crucial not to leave out edge cases that could
+lead to vulnerabilities.
 
 
 
