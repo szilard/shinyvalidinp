@@ -44,14 +44,20 @@ Otherwise, an unchecked input such as `company` being changed to
 
 This function takes a white-list approach (i.e. specify what is allowed) vs a black-list approach (specify what is forbidden). In the latter case it is always easy to forget about something and 
 open a vulnerability. It is also always recommended to restrict the input as much as possible (for
-example if you know that your input has just 2 values use `pattern = "^((value1)|(value2))$"")` instead
+example if you know that your input has just 2 values use `pattern = "^((value1)|(value2))$")` instead
 of the default `pattern="^[[:alnum:]. _-]+$"`).
 
 #### Alternatives
 
-An alternative approach would be to use prepared statements, but currently for example the `RMySQL` package
-does not support that. Another approach would be to use character "escaping", for example the `mysqlEscapeStrings` function
+An alternative approach (considered usually the most secure) would be to use prepared statements, 
+but currently for example the `RMySQL` package does not support that. 
+
+Another approach would be to use character "escaping", for example the `mysqlEscapeStrings` function
 in case of `RMySQL`, but that has had in the past bugs/vulnerabilities. 
+
+If you are using `dplyr`, then you get some basic validation automatically, but that's meant mainly
+to prevent accidental misuse, not an attack. As Hadley says "This is unlikely to prevent any serious
+attack, but should make it unlikely that you produce invalid sql".
 
 #### Additional defenses
 
