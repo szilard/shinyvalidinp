@@ -7,3 +7,4 @@ Author: Szilard
 Maintainer: Szilard <noone@nowhere>
 Description: Functions to validate input for Shiny (on server side)
 License: GPL
+Suggests: testthat
