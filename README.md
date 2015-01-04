@@ -47,6 +47,15 @@ open a vulnerability. It is also always recommended to restrict the input as muc
 example if you know that your input has just 2 values use `pattern = "^((value1)|(value2))$")` instead
 of the default `pattern="^[[:alnum:]. _-]+$"`).
 
+#### Demo
+
+A companion demo Shiny app shows the difference between having and not having
+input validation. Source code is 
+[here on github](https://github.com/szilard/shinyvalidinp-demo) 
+while running live demo
+is [here on ShinyApps.io](https://szilard.shinyapps.io/shinyvalidinp-demo/).
+
+
 #### Alternatives
 
 An alternative approach (considered usually the most secure) would be to use prepared statements, 
