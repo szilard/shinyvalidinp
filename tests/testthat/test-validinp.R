@@ -28,7 +28,8 @@ test_that("numeric", {
 })
 
 test_that("character", {
-    
+    expect_equal(validinp_character("abcABC0123.- _"), "abcABC0123.- _")
+    expect_equal(validinp_character(""), "")
 })
 
 test_that("Date", {
