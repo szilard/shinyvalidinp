@@ -30,6 +30,25 @@ test_that("numeric", {
 test_that("character", {
     expect_equal(validinp_character("abcABC0123.- _"), "abcABC0123.- _")
     expect_equal(validinp_character(""), "")
+    expect_equal(validinp_character("ab", pattern="^((ab)|(cd))$"), "ab")
+    
+    expect_error(validinp_character("'"))
+    expect_error(validinp_character(NA))
+    expect_error(validinp_character(NA_character_))
+    expect_error(validinp_character(character(0)))
+    expect_error(validinp_character(c("ab","cd")))
+    expect_error(validinp_character(list(a="a",b="b")))
+    expect_error(validinp_character(".", pattern="^[[:alnum:]]$"))    
+    expect_error(validinp_character(NULL))    
+    expect_error(validinp_character("abc", pattern="^((ab)|(cd))$"))
+    
+    expect_equal(validinp_character(c("a","b"), many=TRUE), c("a","b"))
+    expect_equal(validinp_character("a", many=TRUE), "a")
+    expect_equal(validinp_character(character(0), many=TRUE), character(0))
+    expect_equal(validinp_character(NULL, many=TRUE), character(0))   ## hack for checkboxGroupInput
+
+    expect_error(validinp_character(c("a",NA), many=TRUE))    
+    expect_error(validinp_character(c("a","a'b"), many=TRUE))     
 })
 
 test_that("Date", {
