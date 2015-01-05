@@ -52,7 +52,17 @@ test_that("character", {
 })
 
 test_that("Date", {
+    expect_equal(validinp_Date(as.Date("2015-01-01")), as.Date("2015-01-01"))
+    expect_equal(validinp_Date(as.Date("2015-01-01"), min="2014-01-01"), as.Date("2015-01-01"))
+
+    expect_error(validinp_Date("2015-01-01"))
+    expect_error(validinp_Date(NA))
+    expect_error(validinp_Date(0))
+    expect_error(validinp_Date(as.Date("2015-01-01"), min="2015-01-02"))
     
+    expect_equal(validinp_Date(as.Date("2015-01-01")+1:2, many=TRUE), as.Date("2015-01-01")+1:2)
+    
+    expect_error(validinp_Date(as.Date("2015-01-01")+1:3, many=TRUE))
 })
 
 

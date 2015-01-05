@@ -4,7 +4,7 @@
 \alias{validinp_character}
 \title{validate character input}
 \usage{
-validinp_character(x, pattern = "^[[:alnum:]. _-]+$", many = FALSE)
+validinp_character(x, pattern = "^[[:alnum:]. _-]*$", many = FALSE)
 }
 \arguments{
 \item{x}{input}
