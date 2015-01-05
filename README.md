@@ -68,6 +68,24 @@ If you are using `dplyr`, then you get some basic validation automatically, but 
 to prevent accidental misuse, not an attack. As Hadley says "This is unlikely to prevent any serious
 attack, but should make it unlikely that you produce invalid sql".
 
+#### Interaction with validate
+
+Shiny has a `validate` function [that can be used](http://shiny.rstudio.com/articles/validation.html)
+to validate inputs. It's focus is however to show user friendly messages rather than
+errors in the UI in case of input values that would produce plain errors. 
+Nevertheless, by making the developer think about input validation it is a nice step
+forward into the direction of eliminating unsafe inputs.
+
+`shiny::validate` can be used in conjunction with this package, 
+for example the input checking above can be rewritten as
+```
+validate(
+  need(try(company <- validinp_character(input$company)), "Please provide valid company")
+)
+```
+in order to have a more user friendly message (by default with grey font instead of
+the red used for errors).
+
 #### Additional defenses
 
 You should also have additional layers of security, such as minimal priviledges to the database user (e.g. for 
