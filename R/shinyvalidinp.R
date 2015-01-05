@@ -51,7 +51,7 @@ validinp_numeric <- function(x, min=-Inf, max=Inf) {
 #' \dontrun{validinp_character(input$chkboxgrp, many=TRUE}
 validinp_character <- function(x, pattern="^[[:alnum:]. _-]*$", many=FALSE) {
     if(many && is.null(x)) return(character(0))  ## hack for checkboxGroupInput
-    if(!( is.character(x) && (many || length(x)==1) && length(x)>=1 && 
+    if(!( is.character(x) && (many || length(x)==1) && 
               all(!is.na(x)) && all(grepl(pattern,x)) )) {
         stop("Invalid input from shiny UI")
     }
